@@ -1,0 +1,389 @@
+<?php 
+include 'conn.php';
+if (isset($_POST['email']) && isset($_POST['password'])) {
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+
+	if (empty($email)) {
+		header("Location: login.php?error=Email is required");
+	} else if (empty($password)){
+		header("Location: login.php?error=Password is required");
+	}else {
+		$stmt = $conn->prepare("SELECT * FROM users WHERE email=?" );
+		$stmt = $conn->prepare("SELECT * FROM users WHERE password=?" );
+		$stmt->execute([$email]);
+		$stmt->execute([$password]);
+		if ($stmt->rowCount()=== 1) {
+		}else {
+			header("Location: login.php?error=Incorect Email or password");
+		}
+	}
+		 
+}
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="look.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages: ['corechart', 'line']});
+      google.charts.setOnLoadCallback(drawBasic);
+      google.charts.load('current', {'packages':['corechart', 'bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChat);
+
+      function drawChat() {
+
+var data = google.visualization.arrayToDataTable([
+  ['Effort', 'Amount given'],
+  ['My all',     95],
+  ['My',     5]
+]);
+
+var options = {
+  pieHole: 0.5,
+  pieSliceTextStyle: {
+    color: 'black',
+  },
+  legend: 'none'
+};
+
+var chart = new google.visualization.PieChart(document.getElementById('donutsingle'));
+chart.draw(data, options);
+}
+
+
+
+google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChavt);
+
+      function drawChavt() {
+
+var data = google.visualization.arrayToDataTable([
+  ['Effort', 'Amount given'],
+  ['My all',     90],
+  ['My',     10]
+]);
+
+var options = {
+  pieHole: 0.5,
+  pieSliceTextStyle: {
+    color: 'black',
+  },
+  legend: 'none'
+};
+
+var chart = new google.visualization.PieChart(document.getElementById('donutingle'));
+chart.draw(data, options);
+}
+
+google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChaut);
+
+      function drawChaut() {
+
+var data = google.visualization.arrayToDataTable([
+  ['Effort', 'Amount given'],
+  ['My all',     65],
+  ['My',     35]
+]);
+
+var options = {
+  pieHole: 0.5,
+  pieSliceTextStyle: {
+    color: 'black',
+  },
+  legend: 'none'
+};
+
+var chart = new google.visualization.PieChart(document.getElementById('donutsinle'));
+chart.draw(data, options);
+}
+
+      function drawBasic() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'X');
+      data.addColumn('number', 'Production');
+
+      data.addRows([
+        [0, 0],   [1, 10],  [2, 23],  [3, 17],  [4, 18],  [5, 9],
+        [6, 11],  [7, 27],  [8, 33],  [9, 40],  [10, 32], [11, 35],
+        [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
+        [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
+        [24, 60], [25, 50], [26, 79], [27, 100], [28, 90], [29, 95],
+        [30, 55], [31, 55]
+      ]);
+
+      var options = {
+        hAxis: {
+          title: 'mois'
+        },
+        vAxis: {
+          title: 'valeurs (k)'
+        }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
+
+
+    function drawStuff() {
+
+var button = document.getElementById('change-chart');
+var chartDiv = document.getElementById('chartdiv');
+
+var data = google.visualization.arrayToDataTable([
+  ['', '', ''],
+  ['Cablage', 1000, 23.3,],
+  ['Assembalge', 1000, 21.5,],
+  ['Test', 1000, 20.3, ],
+  ['Qualité', 9000, 23.9,],
+  ['Emballage', 700, 20.1,]
+]);
+
+var materialOptions = {
+  width: 500,
+  chart: {
+
+  },
+  series: {
+    0: { axis: 'distance' }, // Bind series 0 to an axis named 'distance'.
+    1: { axis: 'brightness' } // Bind series 1 to an axis named 'brightness'.
+  },
+  axes: {
+    y: {
+      distance: {label: 'valeurs'}, // Left y-axis.
+      brightness: {side: 'right', label: 'heures'} // Right y-axis.
+    }
+  }
+};
+
+var classicOptions = {
+  
+  series: {
+    0: {targetAxisIndex: 0},
+    1: {targetAxisIndex: 1}
+  },
+  title: 'Nearby galaxies - distance on the left, brightness on the right',
+  vAxes: {
+    // Adds titles to each axis.
+    0: {title: 'parsecs'},
+    1: {title: 'apparent magnitude'}
+  }
+};
+
+function drawMaterialChart() {
+  var materialChart = new google.charts.Bar(chartDiv);
+  materialChart.draw(data, google.charts.Bar.convertOptions(materialOptions));
+  button.innerText = 'Change to Classic';
+  button.onclick = drawClassicChart;
+}
+
+function drawClassicChart() {
+  var classicChart = new google.visualization.ColumnChart(chartDiv);
+  classicChart.draw(data, classicOptions);
+  button.innerText = 'Change to Material';
+  button.onclick = drawMaterialChart;
+}
+
+drawMaterialChart();
+};
+
+
+
+function drawChart() {
+
+var data = google.visualization.arrayToDataTable([
+  ['Effort', 'Amount given'],
+  ['My all',     70],
+  ['My',     30]
+]);
+
+var options = {
+  pieHole: 0.5,
+  pieSliceTextStyle: {
+    color: 'black',
+  },
+  legend: 'none'
+};
+
+var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+chart.draw(data, options);
+}
+
+
+
+
+    </script>
+    
+</head>
+<body>
+    <header class="header">
+        <nav>
+        <div class="top">
+            <div class="topbar">
+                <div class="search">
+                    <label><input type="text" placeholder="Search here"><i class='bx bx-search'></i></label>
+                </div>
+    
+                <div class="we9t">
+                <div class="day">day</div>
+                <div class="date">date</div>
+                <div class="time">time</div> 
+                </div>
+
+                <div class="user">
+                    <a href="#"><i class='bx bxs-bell'></i></a>
+                    <a href="#"><i class='bx bxs-user'></i></a>
+                </div>
+            </div>
+       </div>
+       </nav>
+    </header>
+    <section>
+        <div id="sidebar">
+            <h1 class="logo">i<span>Smart</span></h1>
+                <ul class="sidenav">
+                    <li class="active">
+                    <a href="config.php"><i class='bx bxs-home'></i>Tableau de bord</a></li>
+                    <li>
+                    <a href="operateur.php"><i class='bx bxs-group'></i>Opérateurs</a>
+                    </li>
+                    <li>
+                    <a href="stock.html"><i class='bx bx-bar-chart'></i> Stocks </a></li>
+                    <li class="postes">
+                        <a href="poste.php"><i class='bx bxs-dashboard' ></i> Postes </a>
+                    </li>
+                   
+                    <li>
+                    <a href="alerte.php"><i class='bx bx-message-rounded-error' ></i> Alertes</a></li>
+        
+                    <li>
+                        <a href="login.php" class="logout">
+                            <i class='bx bxs-log-out-circle' ></i>
+                            <span class="text">Logout</span>
+                        </a>
+                    </li>
+                </ul> 
+            </div>
+    </section>
+        <div class="main">
+            <div class="cards">
+                <div class="card">
+                    <div class="icon-box">
+                        <a><i class='bx bxs-up-arrow'></i>-49%</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="cardname">Quantité:</div>
+                        <div class="numbers">80,000</div>
+                        <div class="text">production</div>
+                        <div class="numbers">90,000</div>
+                        <div class="text">but</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="icon-box">
+                        <a><i class='bx bxs-down-arrow'></i>-45%</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="cardname">Cout de fabrication:</div>
+                        <div class="numbers">$34k</div>
+                        <div class="text">ce mois</div>
+                        <div class="numbers">$54k</div>
+                        <div class="text">dernier mois</div>
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <div class="icon-box">
+                        <a><i class='bx bxs-down-arrow'></i>-50%</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="cardname">Cout de travail:</div>
+                        <div class="numbers">$8k</div>
+                        <div class="text">ce mois</div>
+                        <div class="numbers">$9k</div>
+                        <div class="text">dernier mois</div>
+                    </div>
+                    
+                </div>
+                <div class="card">
+                    <div class="icon-box">
+                        <a><i class='bx bxs-up-arrow'></i>-49%</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="cardname">Quantité:</div>
+                        <div class="numbers">80,000</div>
+                        <div class="text">production</div>
+                        <div class="numbers">90,000</div>
+                        <div class="text">but</div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="charts">
+                <div class="chart">
+                    <div class="cardname">Cout de production</div>
+                    <div id="chart_div" style="width: 500px; height: 200px"></div>
+                </div>
+                <div class="chart">
+                    <div class="cardname">Temps d'execution et d'arret</div>
+                    <div id="chartdiv" style="width: 400px; height: 200px;"></div>
+                </div>
+            </div>
+    
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="cardname">Disponibilité:</div>
+                        <div id="donut_single" style="width: 100px; height: 90px;"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="cardname">Performance:</div>
+                        <div id="donutsingle" style="width: 100px; height: 90px;"></div>
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="cardname">Qualité:</div>
+                        <div id="donutingle" style="width: 100px; height: 90px;"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="cardname">OEE:</div>
+                        <div id="donutsinle" style="width: 100px; height: 90px;"></div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+   
+
+
+
+    <script src="script.js"></script>
+    
+    <script src="chart1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>

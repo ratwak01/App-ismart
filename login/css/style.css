@@ -1,0 +1,265 @@
+*{
+    margin: 0px; 
+    padding: 0px; 
+    font-family: 'Montserrat', sans-serif;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none; 
+}
+body{
+    background: white; 
+    height: 100vh; 
+    overflow: hidden;
+}
+/* SIDEBAR */
+#sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 230px; 
+    background: #424242;
+	height: 100%; 
+    
+}
+.sidenav{
+    width: 100%;
+    margin-top: 40px;
+}
+.sidenav li{
+    height: 48px;
+    box-shadow: #AFC759;
+    border-radius: 48px 0 0 48px;
+    padding: 4px;
+}
+.sidenav li.active{
+    background:white;
+    position: relative;
+}
+.sidenav li.active a {
+    color: #AFC759;
+}
+.sidenav li.active::before{
+    content: '';
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	top: -40px;
+	right: 0;
+	box-shadow: 20px 20px 0 white;
+	z-index: -1;
+}
+.sidenav li.active::after{
+    content: '';
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	bottom: -40px;
+	right: 0;
+	box-shadow: 20px -20px 0 white ;
+	z-index: -1;
+}
+.sidenav li a {
+	width: 100%;
+	height: 100%;
+	background: #424242;
+	display: flex;
+	align-items: center;
+	border-radius: 48px;
+	font-size: 16px;
+	color: white;
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+#sidebar .sidenav li a:hover {
+	color:#AFC759 ;
+} 
+.sidenav li a .bx {
+	min-width: calc(60px  - ((4px + 6px) * 2));
+	display: flex;
+	justify-content: center;
+}
+.logo span{
+    font-size: 50px; 
+    color: white; 
+    font-weight: normal;}
+#sidebar .logo{
+    margin-left: 30px;
+    margin-top: 10px;
+    align-items: center;
+    color:#AFC759;
+    display: flex;
+    height: 56px;
+    font-weight:normal;
+    font-size: 50px;}
+.topnav {
+    width: 230px; 
+    background: #424242;
+    padding:25px; 
+	height: 10px;
+    position: relative;
+    transition: 1s ease-in-out; 
+    box-shadow: #AFC759;
+}
+#sidebar .sidenav .dropdown {
+    padding: 6px 6px 14px 70px;
+    margin-top: px;
+    background-color:white; 
+    white-space: nowrap;
+    
+}
+#sidebar .sidenav .dropdown a {
+    color: #AFC759;
+}
+
+/* SIDEBAR */
+/* TOPBAR */
+#navbar {
+    position: relative;
+    width: calc(100%-230px);
+    left: 230px;
+    
+}
+/*NAVBAR*/
+#navbar nav{
+    height:50px;
+    background: #424242;
+    padding: 0 ;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px; 
+    position: relative;
+}
+#navbar nav::before{
+    content: '';
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	bottom: -40px;	
+    left: 0;
+    border-radius: 50%;
+    box-shadow: -20px -20px 0 #424242 ;
+}
+
+#navbar nav a {
+    color:white;
+    font-size:25px;
+}
+#navbar nav a:hover{
+    color: #AFC759;
+}
+
+.we9t{
+    padding-left: 50px;
+    margin: 8px;
+    color: #ccc;
+    display: flex;
+ }
+ .date{
+    margin: 0 5px;
+ }
+
+.search {
+    padding-left: 20px;
+    padding-right: 400px;
+    position: relative;
+    width: 200px;
+    margin: 0 10px;;
+}
+.search label{
+    position: relative;
+    width: 100%;
+}
+.search label input{
+    width: 100%;
+    height: 30px;
+    border-radius: 40px;
+    padding: 5px 20px;
+    padding-left: 30px;
+    font-size: 13px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+.search label i{
+    position: absolute;
+    top: 1px;
+    left: 10px;
+    font-size: 1.2rem;
+}
+
+
+
+
+/*NAVBAR*/
+
+/* TOPBAR */
+
+/*   main   */
+.main{
+    position: absolute;
+    top: 60px;
+    width: calc(100%-230px);
+    left: 230px;
+    min-height: calc(100% - 60px);
+
+}
+
+.cards{
+    width: 100%;
+    padding: 35px 20px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    
+}
+.card{
+    width: 200px;
+}
+.card .icon-box{
+    color: #AFC759;
+}
+.card .cardname{
+    font-size: 20px;
+}
+.card .numbers{
+    position: relative;
+    font-weight: 300;
+    font-size: 18px;
+    color: #AFC759;
+
+}
+.card .text{
+    color: #ccc;
+}
+
+.cards .card{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+.charts{
+    display: grid;
+    grid-template-columns: 2fr 1fr ;
+    width: 100%;
+    padding: 20px;
+    padding-top: 0;
+}
+.chart{
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow:0 7px 25px rgba(0, 0, 0, 0.08);
+    width: 100%;
+}
+.chart .cardname{
+    font-size: 20px;
+}
